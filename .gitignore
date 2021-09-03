@@ -1,0 +1,5 @@
+/node_modules
+package-lock.json
+/visualizer/node_modules
+cluster-setup/client/src/node_modules
+.idea/

@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1(align= 'center') Distributed Debugger Visualization
+  h3(align='center') The cluster view:
+  - const cm = u => `${u}cm`;
+  - const cmScale = `scale(15)`
+  svg(id='graph2' width=cm(40), height=cm(20))
+      rect(width=cm(40) height=cm(20), fill='none', stroke='black', stroke-width=2)
+  script.
+    generate(150, 150, "graph2");

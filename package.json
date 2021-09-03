@@ -1,0 +1,29 @@
+{
+  "name": "distributed-debugger",
+  "version": "1.0.0",
+  "description": "CLI application to debug distributed systems",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "commander": "^8.1.0",
+    "express": "^4.17.1",
+    "liferaft-patched": "^1.0.0",
+    "restify": "^8.5.1",
+    "uuid": "^8.3.2",
+    "argh": "^1.0.0",
+    "axon": "^2.0.0",
+    "diagnostics": "^2.0.0",
+    "memdown": "^5.1.0",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9"
+  }
+}
