@@ -23,11 +23,8 @@ clientApi.post('/restart', restartNode);
 const timer = ms => new Promise( res => setTimeout(res, ms));
 
 const ports = [
-    10001,
-    10002, 10003,
-    10004, 10005,
-    10006, 10007,
-    10008, 10009
+    10001, 10002, 10003,
+    10004, 10005, 10006, 10007,
 ];
 
 const nodeDetails = {
