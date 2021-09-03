@@ -1,9 +1,9 @@
-function startRaft(portNum){
+function startRaft(portNum, nodeID){
     const debug = require('diagnostics')('raft')
         , argv = require('argh').argv
         , Log = require('liferaft-patched/log')
-        , LifeRaft = require('liferaft-patched');
-
+        , LifeRaft = require('liferaft-patched')
+        , axios = require('axios');
     let msg;
 
     if (argv.queue) msg = require(argv.queue);
@@ -66,9 +66,10 @@ function startRaft(portNum){
 // assigned. This allows the failure of one single server.
 //
     const ports = [
-        8081, 8082,
-        8083, 8084,
-        8085
+        10002, 10003,
+        10004, 10005,
+        10006, 10007,
+        10008, 10009
     ];
 
 //
@@ -93,21 +94,22 @@ function startRaft(portNum){
 
 
     raft.on('heartbeat timeout', function () {
-        debug('heart beat timeout, starting election');
+        console.log('heart beat timeout, starting election');
     });
 
     raft.on('term change', function (to, from) {
-        debug('were now running on term %s -- was %s', to, from);
+        console.log('were now running on term %s -- was %s', to, from);
     }).on('leader change', function (to, from) {
-        debug('we have a new leader to: %s -- was %s', to, from);
+        console.log('we have a new leader to: %s -- was %s', to, from);
     }).on('state change', function (to, from) {
-        debug('we have a state to: %s -- was %s', to, from);
+        console.log('we have a state to: %s -- was %s', to, from);
     });
 
     raft.on('leader', function () {
         console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
         console.log('I am elected as leader');
         console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+        axios.post('http://localhost:8080/select-leader', {nodeID: nodeID})
     });
 
     raft.on('candidate', function () {

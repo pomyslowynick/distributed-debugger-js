@@ -23,9 +23,9 @@ clientApi.post('/restart', restartNode);
 const timer = ms => new Promise( res => setTimeout(res, ms));
 
 const ports = [
-    10081, 10082,
-    10083, 10084,
-    10085
+    10002, 10003,
+    10004, 10005,
+    10006, 10007
 ];
 
 const nodeDetails = {
@@ -87,5 +87,6 @@ async function startServer(port) {
     clientApi.listen(port, function () {
         console.log('%s listening at %s', clientApi.name, clientApi.url);
     });
-    raftClient = startRaft(port+2000);
+    console.log(port+2000);
+    raftClient = startRaft(port+2000, nodeDetails.nodeID);
 }

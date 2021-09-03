@@ -23,11 +23,22 @@ serverApi.post('/heartbeat', respondHeartbeat);
 serverApi.post('/kill', sendKillCommand);
 serverApi.post('/start-simulation', startSimulation);
 serverApi.post('/restart', restartNode);
+serverApi.post('/select-leader', selectLeader);
 
 function getClusterState(req, res, next) {
     req.response = clusterState;
     req.body = clusterState;
     res.header("Access-Control-Allow-Origin", "*");
+    res.send(req.response);
+    return next();
+}
+
+function selectLeader(req, res, next) {
+    const nodeID = req.body.nodeID;
+    const nodeLookup = clusterState.nodes.find(o => o.nodeID === req.body.nodeID);
+    nodeLookup.isLeader = true;
+    clusterState.leader = nodeID;
+    req.response = "Leader selected";
     res.send(req.response);
     return next();
 }
@@ -75,11 +86,11 @@ function respondHeartbeat(req, res, next) {
             isLeader: req.body.isLeader,
             urlHandle: clusterState.urlNum,
         }
-        clusterState.urlNum += 1
         clusterState.nodes.push(newNode);
-        clusterState.activeNodes += 1;
         req.response = {message: 'Successfully connected', urlHandle: newNode.urlHandle};
         res.send(req.response);
+        clusterState.urlNum += 1
+        clusterState.activeNodes += 1;
         return next();
     }
 }
