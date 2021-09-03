@@ -66,6 +66,7 @@ function startRaft(portNum, nodeID){
 // assigned. This allows the failure of one single server.
 //
     const ports = [
+        10001,
         10002, 10003,
         10004, 10005,
         10006, 10007,
