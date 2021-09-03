@@ -17,6 +17,8 @@
     "memdown": "^5.1.0",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "restify": "^8.5.1",
+    "liferaft-patched": "^1.0.0"
   }
 }
